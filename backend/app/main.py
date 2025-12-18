@@ -8,7 +8,7 @@ from app.helpers.exceptionHandler import (
     value_error_handler,
     global_exception_handler
 )
-from app.routers import usersRoute
+from app.routers import usersRoute, aiRoute
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
@@ -19,6 +19,7 @@ app.add_exception_handler(ValueError, value_error_handler)
 app.add_exception_handler(Exception, global_exception_handler)
 
 app.include_router(usersRoute.router, prefix='/api/'+API_VERSION)
+app.include_router(aiRoute.router, prefix='/api/'+API_VERSION)
 
 @app.get("/")
 async def read_root():

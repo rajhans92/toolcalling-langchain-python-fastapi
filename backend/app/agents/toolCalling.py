@@ -1,6 +1,6 @@
 from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langchain.messgaeables import HumanMessage
+from langchain_core.messages import HumanMessage
 from app.agents.tools import get_weather, get_aqi, get_cost_of_living
 
 
@@ -18,7 +18,7 @@ def toolCallingAi(question: str) -> str:
 
         result = agent.invoke({"messages": [HumanMessage(content=question)]})
 
-        print(result["messages"][-1].content)
+        print(result["messages"])
 
         return result["messages"][-1].content
     except Exception as e:
